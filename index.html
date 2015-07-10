@@ -47,19 +47,21 @@
 	<script>
 	$(window).load(function(){
 	
-		function startCam()
-		{
-			navigator.camera.getPicture(displayPic,errorPic,{quality:70,destinationType: Camera.DestinationType.DATA_URL});
-		}
-
-		function displayPic(imageURL)
-		{
-			document.getElementById("userPic").src = "data:image/jpeg;base64," + imageURL;
-		}
-		function errorPic()
-		{
+		$("#btnCamera").click(function(){
 		
-		}
+			navigator.camera.getPicture(displayPic,errorPic,{quality:70,destinationType: Camera.DestinationType.DATA_URL});
+
+			function displayPic(imageURL)
+			{
+				document.getElementById("userPic").src = "data:image/jpeg;base64," + imageURL;
+			}
+			function errorPic()
+			{
+		
+			}
+		
+		});
+		
 	
 		$("input[type='button']").click(function(){
 			var name = $("#userName").val();
@@ -118,7 +120,7 @@
 	<form action="#">
 		<div id="regForm">
 			<div id="userPic"><img src="" id="userPic"/>
-			<button onclick="startCam()">Camera</button><button>Photos</button></div>
+			<input type="button" id="btnCamera" value="Camera" /><button>Photos</button></div>
 			
 			<div id="userDetails">
 				<p>
