@@ -16,7 +16,7 @@
     <author href="https://build.phonegap.com" email="support@phonegap.com">
         Najib Baharudin
     </author>
-	<icon src="images/ako92.png" />
+	<icon src="images/register_icon.png" />
 	<gap:splash src="html5_video_poster.png" />
 	
 	<feature name="http://api.phonegap.com/1.0/file" />

@@ -41,6 +41,10 @@
 		{
 			border: 1px solid red;
 		}
+		.succNameBox, .succEmailBox
+		{
+			border: 1px solid green;
+		}
 	</style>
 	<script src="cordova.js"></script>
 	<script src="scripts/jquery-2.1.4.js"></script>
@@ -49,7 +53,7 @@
 	
 		$("#btnCamera").click(function(){
 		
-			navigator.camera.getPicture(displayPic,errorPic,{quality:70,destinationType: Camera.DestinationType.DATA_URL});
+			navigator.camera.getPicture(displayPic,errorPic,{quality:80,destinationType: Camera.DestinationType.DATA_URL});
 
 			function displayPic(imageURL)
 			{
@@ -63,7 +67,7 @@
 		});
 		
 	
-		$("input[type='button']").click(function(){
+		$("#btnReg").click(function(){
 			var name = $("#userName").val();
 			var email = $("#userEmail").val();
 			
@@ -120,7 +124,8 @@
 	<form action="#">
 		<div id="regForm">
 			<div id="userPic"><img src="" id="pic"/>
-			<input type="button" id="btnCamera" value="Camera" /><button>Photos</button></div>
+			<input type="button" id="btnCamera" value="Camera" /><input type="button" id="btnPhotos" value="Photos"/>
+			</div>
 			
 			<div id="userDetails">
 				<p>
