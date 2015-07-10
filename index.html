@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="scripts/jquery-ui/jquery-ui.css" rel="stylesheet">
+	<style>
+		div#regForm
+		{
+			background: #fff;
+			width:345px;
+			height:200px;
+			border-radius: 5px;
+			border: 1px dotted #000000;
+			padding:10px;
+		}
+		div#userPic
+		{
+			width:100px;
+			height:180px;
+			position:relative;
+			float:left;
+		}
+		img{
+			border: 1px solid #000000;
+			width:100px;
+			height:100px;
+		}
+		div#userDetails
+		{
+			float:right;
+			position:relative;
+		}
+		.errorName, .errorEmail
+		{
+			color:red;
+		}
+		.successMsg
+		{
+			color:green;
+		}
+		.errorNameBox, .errorEmailBox
+		{
+			border: 1px solid red;
+		}
+	</style>
+	<script src="cordova.js"></script>
+	<script src="scripts/jquery-2.1.4.js"></script>
+	<script>
+	$(window).load(function(){
+	
+		function startCam()
+		{
+			navigator.camera.getPicture(displayPic,errorPic,{quality:70,destinationType: Camera.DestinationType.DATA_URL});
+		}
+
+		function displayPic(imageURL)
+		{
+			document.getElementById("userPic").src = "data:image/jpeg;base64," + imageURL;
+		}
+		function errorPic()
+		{
+		
+		}
+	
+		$("input[type='button']").click(function(){
+			var name = $("#userName").val();
+			var email = $("#userEmail").val();
+			
+			var regexName = /^[a-zA-Z]+$/;
+			var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+			
+			if(name != "")
+			{	
+				if(!regexName.test(name))
+				{	
+					$("#errorName").addClass("errorName").html("Invalid Name!");
+					$("#userName").addClass("errorNameBox");
+				}
+				else
+				{
+					$("#errorName").removeClass("errorName").html("");
+					$("#userName").removeClass("errorNameBox");
+					$("#dialogMsg").addClass("successMsg").html(name);
+				}
+			}
+			else
+			{
+				$("#errorName").addClass("errorName").html("Please insert your name");
+				$("#userName").addClass("errorNameBox");
+			}
+			
+			if(email != "")
+			{	
+				if(!regexEmail.test(email))
+				{	
+					$("#errorEmail").addClass("errorEmail").html("Invalid Email!");
+					$("#userEmail").addClass("errorEmailBox");
+				}
+				else
+				{
+					$("#errorEmail").removeClass("errorEmail").html("");
+					$("#userEmail").removeClass("errorEmailBox");
+					$("#dialogMsg1").addClass("successMsg").html(email);
+				}
+			}
+			else
+			{
+				$("#errorEmail").addClass("errorEmail").html("Please insert your email");
+				$("#userEmail").addClass("errorEmailBox");
+			}
+			
+			
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<form action="#">
+		<div id="regForm">
+			<div id="userPic"><img src="" id="userPic"/>
+			<button onclick="startCam()">Camera</button><button>Photos</button></div>
+			
+			<div id="userDetails">
+				<p>
+				<label>Name: <input type="text" name="userName" id="userName"/></label>
+				<br/>
+				<label><span id="errorName"></span></label>
+				</p>
+				<p>
+				<label>Email: <input type="email" name="userEmail" id="userEmail"/></label>
+				<br/>
+				<label><span id="errorEmail"></span></label>
+				</p>
+				<p>
+				<label><input type="button" value="Register" id="btnReg"><label>
+				</p>
+				Your Name<div id="dialogMsg"></div>
+				Your Email<div id="dialogMsg1"></div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>
